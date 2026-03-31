@@ -1,0 +1,11 @@
+VARS: x
+
+THREAD T1:
+  1: x = 42 -> 2
+  2: PRINT x -> -1
+
+TEST:
+INPUT: 
+EXPECTED: 42
+K: 10
+

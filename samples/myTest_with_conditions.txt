@@ -1,0 +1,39 @@
+VARS: x, y, z, a, b
+
+## Приклад на основі myTest.txt з умовами V==C та V<C у блоках розгалуження.
+## T1: умова z==3 — якщо true, x=a (3), інакше x=0; потім PRINT x.
+## T2: умова z<10 — якщо true, PRINT x (20), інакше PRINT a (6).
+## T3: умова x==30 — якщо true, PRINT x (30), інакше PRINT z (9).
+
+THREAD T1:
+  1: x = 10 -> 2
+  2: y = x -> 3
+  3: z = 3 -> 4
+  4: a = z -> 5
+  5: z == 3 -> 6, 8
+  6: x = a -> 7
+  7: PRINT x -> -1
+  8: x = 0 -> 7
+
+THREAD T2:
+  1: x = 20 -> 2
+  2: y = x -> 3
+  3: z = 6 -> 4
+  4: a = z -> 5
+  5: z < 10 -> 6, 8
+  6: PRINT x -> -1
+  8: PRINT a -> -1
+
+THREAD T3:
+  1: x = 30 -> 2
+  2: y = x -> 3
+  3: z = 9 -> 4
+  4: a = z -> 5
+  5: x == 30 -> 6, 8
+  6: PRINT x -> -1
+  8: PRINT z -> -1
+
+TEST:
+INPUT:
+EXPECTED: 3 20 30
+K: 150

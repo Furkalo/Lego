@@ -1,0 +1,28 @@
+VARS: x, y, z, a, b
+
+THREAD T1:
+  1: x = 10 -> 2
+  2: y = x -> 3
+  3: z = 3 -> 4
+  4: a = z -> 5
+  5: x = a -> 6
+  6: PRINT x -> -1
+
+THREAD T2:
+  1: x = 20 -> 2
+  2: y = x -> 3
+  3: z = 6 -> 4
+  4: a = z -> 5
+  5: PRINT x -> -1
+
+THREAD T3:
+  1: x = 30 -> 2
+  2: y = x -> 3
+  3: z = 9 -> 4
+  4: a = z -> 5
+  5: PRINT x -> -1
+
+TEST:
+INPUT:
+EXPECTED: 20 3 30
+K: 150

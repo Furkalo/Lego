@@ -1,0 +1,41 @@
+VARS: x, y, z, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v
+
+THREAD T1:
+  1: x = 10 -> 2
+  2: y = x -> 3
+  3: z = 3 -> 4
+  4: a = z -> 5
+  5: PRINT x -> -1
+
+THREAD T2:
+  1: x = 20 -> 2
+  2: y = x -> 3
+  3: z = 6 -> 4
+  4: a = z -> 5
+  5: PRINT x -> -1
+
+THREAD T3:
+  1: x = 30 -> 2
+  2: y = x -> 3
+  3: z = 9 -> 4
+  4: a = z -> 5
+  5: PRINT x -> -1
+
+THREAD T4:
+  1: x = 40 -> 2
+  2: y = x -> 3
+  3: z = 12 -> 4
+  4: a = z -> 5
+  5: PRINT x -> -1
+
+THREAD T5:
+  1: x = 50 -> 2
+  2: y = x -> 3
+  3: z = 15 -> 4
+  4: a = z -> 5
+  5: PRINT x -> -1
+
+TEST:
+INPUT: 
+EXPECTED: 
+K: 10
