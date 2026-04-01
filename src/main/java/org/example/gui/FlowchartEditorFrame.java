@@ -1,5 +1,6 @@
 package org.example.gui;
 
+import org.example.codegen.JavaCodeGenerator;
 import org.example.model.ProgramSpecification;
 import org.example.parser.TextFlowchartParser;
 import org.example.simulation.ExecutionResult;
@@ -254,6 +255,15 @@ public class FlowchartEditorFrame extends JFrame {
                             msg.append(results.get(0).getOutput());
                         }
 
+                        try {
+                            File javaOut = writeGeneratedJavaFile(spec);
+                            msg.append("\n\nJava-код згенеровано у файл:\n");
+                            msg.append(javaOut.getAbsolutePath());
+                        } catch (IOException ioEx) {
+                            msg.append("\n\nНе вдалося зберегти згенерований Java-код: ");
+                            msg.append(ioEx.getMessage());
+                        }
+
                         JOptionPane.showMessageDialog(FlowchartEditorFrame.this,
                                 msg.toString(),
                                 "Результат тесту",
@@ -293,6 +303,19 @@ public class FlowchartEditorFrame extends JFrame {
             result.add(Integer.parseInt(p));
         }
         return result;
+    }
+
+    /**
+     * Генерує Java-код з поточної специфікації блок-схем і записує у файл у робочій директорії JVM.
+     */
+    private File writeGeneratedJavaFile(ProgramSpecification spec) throws IOException {
+        JavaCodeGenerator generator = new JavaCodeGenerator();
+        String code = generator.generate(spec, "GeneratedProgram");
+        File out = new File(System.getProperty("user.dir"), "GeneratedProgram.java");
+        try (FileWriter writer = new FileWriter(out)) {
+            writer.write(code);
+        }
+        return out;
     }
 }
 
